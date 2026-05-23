@@ -1,3 +1,3 @@
 locals {
-project_name = "project-bedrock"
+  project_name = "project-bedrock"
 }
