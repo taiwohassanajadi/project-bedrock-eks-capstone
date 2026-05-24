@@ -18,3 +18,6 @@ secrets*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# External cloned repos
+retail-store-sample-app/
