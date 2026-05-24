@@ -1,0 +1,53 @@
+catalog:
+  fullnameOverride: catalog
+
+  app:
+    persistence:
+      provider: mysql
+      endpoint: bedrock-mysql.c4jcw6ek4slo.us-east-1.rds.amazonaws.com:3306
+      database: catalog
+
+      secret:
+        create: false
+        name: catalog-db
+        username: adminuser
+        password: bUpZ3xBaRIw0CGHB
+
+orders:
+  fullnameOverride: orders
+
+  app:
+    persistence:
+      provider: postgres
+      endpoint: bedrock-postgres.c4jcw6ek4slo.us-east-1.rds.amazonaws.com:5432
+      database: orders
+
+      secret:
+        create: false
+        name: orders-db
+        username: adminuser
+        password: BjGLVe4BArfooF5w
+
+    messaging:
+      provider: in-memory
+
+cart:
+  fullnameOverride: carts
+
+checkout:
+  fullnameOverride: checkout
+
+  retail:
+    checkout:
+      endpoints:
+        orders: http://orders:80
+
+ui:
+  fullnameOverride: ui
+
+  app:
+    endpoints:
+      catalog: http://catalog:80
+      carts: http://carts:80
+      checkout: http://checkout:80
+      orders: http://orders:80
