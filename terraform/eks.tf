@@ -3,15 +3,13 @@ resource "aws_iam_role" "eks_cluster_role" {
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "eks.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "eks.amazonaws.com"
       }
-    ]
+      Action = "sts:AssumeRole"
+    }]
   })
 
   tags = {
@@ -29,12 +27,6 @@ resource "aws_eks_cluster" "main" {
   role_arn = aws_iam_role.eks_cluster_role.arn
   version  = "1.34"
 
-  vpc_config {
-    subnet_ids              = concat(aws_subnet.public[*].id, aws_subnet.private[*].id)
-    endpoint_private_access = true
-    endpoint_public_access  = true
-  }
-
   enabled_cluster_log_types = [
     "api",
     "audit",
@@ -42,6 +34,12 @@ resource "aws_eks_cluster" "main" {
     "controllerManager",
     "scheduler"
   ]
+
+  vpc_config {
+    subnet_ids              = concat(aws_subnet.public[*].id, aws_subnet.private[*].id)
+    endpoint_private_access = true
+    endpoint_public_access  = true
+  }
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_cluster_policy
@@ -57,15 +55,13 @@ resource "aws_iam_role" "eks_node_role" {
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
       }
-    ]
+      Action = "sts:AssumeRole"
+    }]
   })
 
   tags = {

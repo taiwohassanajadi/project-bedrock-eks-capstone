@@ -14,7 +14,7 @@ def lambda_handler(event, context):
             encoding='utf-8'
         )
 
-        print(f"New file uploaded: {key}")
+        print(f"Image received: {key}")
         print(f"Bucket: {bucket}")
 
     return {
