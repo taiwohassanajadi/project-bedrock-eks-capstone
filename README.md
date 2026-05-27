@@ -310,7 +310,7 @@ helm upgrade --install retail-store src/app/chart \
 Retail Store URL:
 
 ```text
-http://<ALB-DNS-NAME>
+http://<http://k8s-retailap-retailui-dd768ff5c0-1086378078.us-east-1.elb.amazonaws.com/>
 ```
 
 ---
